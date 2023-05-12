@@ -57,40 +57,46 @@ class SliderController extends Controller
         return view('admin.slider.edit', compact('slider'));
     }
 
-    public function update(SliderFormRequest $request, Slider $slider)
+
+    public function update(Request $request, Slider $slider)
     {
-        $validatedData = $request->validated();
-    
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:800',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
+            'status' => 'nullable',
+        ]);
+
+        $validatedData = $request->all();
+
         if ($request->hasFile('image')) {
-            $destination = $slider->image;
-            if (File::exists($destination)) {
-                File::delete($destination);
+            // Delete the previous image file
+            if (File::exists($slider->image)) {
+                File::delete($slider->image);
             }
-    
+
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             $file->move('uploads/slider/', $filename);
             $validatedData['image'] = "uploads/slider/$filename";
-        } else {
-            // If no new image is uploaded, use the existing image
-            $validatedData['image'] = $slider->image;
         }
-    
+
         $validatedData['status'] = $request->status == true ? '1' : '0';
-    
+
         $slider->update([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'image' => $validatedData['image'],
             'status' => $validatedData['status'],
         ]);
-    
-        return redirect('admin/sldr')->with('message', 'Slider Updated Successfully');
+
+        return redirect('admin/sldr')->with('message', 'Slider Updated');
     }
-    
-    
-    
+
+
+
+
 
     public function destroy($id)
     {

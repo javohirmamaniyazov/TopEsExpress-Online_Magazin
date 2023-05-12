@@ -39,7 +39,7 @@ Route::prefix('/admin')->middleware('auth', 'isAdmin')->group(function () {
     Route::get('/category/create', [CategoryController::class, 'create']);
     Route::post('category', [CategoryController::class, 'store']);
     Route::get('/category/{category}/edit', [CategoryController::class, 'edit']);
-    Route::post('/category/{category}/update', [CategoryController::class, 'update']);
+    Route::put('/category/{category}', [CategoryController::class, 'update']);
     Route::any('category/{category}/delete', [CategoryController::class, 'delete']);
 
 

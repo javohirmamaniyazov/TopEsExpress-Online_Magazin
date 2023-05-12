@@ -149,24 +149,40 @@
                                     <input type="text" value="{{ $slider->description }}" name="description"
                                         class="form-control">
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="image">Image</label>
                                     <input type="file" name="image" class="form-control" />
                                     <img src="{{ asset("$slider->image") }}" style="width: 50px; height: 50px;">
-                                    {{-- @if ($slider->image)
-                                        <div>
-                                            <img class="img-responsive mt-2" style="width:300px; height:200px;"
-                                                alt="image" src="/Uploads/slider/{{ $slider->image }}"
-                                                id="sliderImage" onclick="openFileInput()">
-                                        </div>
-                                    @endif
-                                    <div id="fileInputContainer" style="display: none;">
-                                        <input type="file" name="image" id="image" class="form-control">
-                                        @error('image')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
-                                    </div> --}}
+                                </div> --}}
+                                <div class=" col-md-6 mb-3">
+                                    <label for="image">Change Image</label>
+                                    <div class="image-preview">
+                                        <img class="img-responsive mt-2" style="width:300px; height:200px;"
+                                            alt="image" src="/Uploads/Category/{{ $slider->image }}">
+                                        <input type="file" name="image" id="image"
+                                            class="form-control d-none">
+                                    </div>
+                                    @error('image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
+                                <script>
+                                    // Add event listener to the image element
+                                    document.querySelector('.image-preview img').addEventListener('click', function() {
+                                        // Trigger a click event on the file input element
+                                        document.querySelector('.image-preview input[type=file]').click();
+                                    });
+
+                                    // Preview selected image
+                                    document.querySelector('.image-preview input[type=file]').addEventListener('change', function() {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.querySelector('.image-preview img').setAttribute('src', e.target.result);
+                                        };
+                                        reader.readAsDataURL(this.files[0]);
+                                    });
+                                </script>
 
                                 <div class="mb-3">
                                     <label for="">Status</label><br>

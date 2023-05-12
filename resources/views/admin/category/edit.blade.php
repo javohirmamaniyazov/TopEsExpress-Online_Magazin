@@ -132,7 +132,7 @@
 
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('admin/category/'.$category->id.'/update') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ url('admin/category/'.$category->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -151,11 +151,40 @@
                                         <textarea type="text" name="description" rows="3" id="description" class="form-control">{{ $category->description }}</textarea>
                                         @error('description') <small class="text-danger">{{ $message }}</small>@enderror
                                     </div>
-                                    <div class=" col-md-6 mb-3">
+                                    {{-- <div class=" col-md-6 mb-3">
                                         <label for="image">Image</label>
                                         <input type="file" name="image" id="image" class="form-control">
-                                        <img src="{{ asset("$slider->image") }}" alt="">
+                                        <img src="{{ asset("$category->image") }}" alt="">
+                                    </div> --}}
+                                    <div class=" col-md-6 mb-3">
+                                        <label for="image">Change Image</label>
+                                        <div class="image-preview">
+                                            <img class="img-responsive mt-2" style="width:300px; height:200px;"
+                                                alt="image" src="/Uploads/Category/{{ $category->image }}">
+                                            <input type="file" name="image" id="image"
+                                                class="form-control d-none">
+                                        </div>
+                                        @error('image')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
+
+                                    <script>
+                                        // Add event listener to the image element
+                                        document.querySelector('.image-preview img').addEventListener('click', function() {
+                                            // Trigger a click event on the file input element
+                                            document.querySelector('.image-preview input[type=file]').click();
+                                        });
+
+                                        // Preview selected image
+                                        document.querySelector('.image-preview input[type=file]').addEventListener('change', function() {
+                                            var reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                document.querySelector('.image-preview img').setAttribute('src', e.target.result);
+                                            };
+                                            reader.readAsDataURL(this.files[0]);
+                                        });
+                                    </script>
                                     <div class=" col-md-6 mb-3">
                                         <label for="status">Status</label><br />
                                         <input type="checkbox" name="status" id="status">
