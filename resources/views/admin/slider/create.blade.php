@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BadommShop') }}</title>
 
     <link href="{{ asset('admin/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -16,6 +16,13 @@
         rel="stylesheet">
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
     @livewireStyles
 </head>
@@ -29,8 +36,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar position-fixed mb-4 static-top shadow"
-                    style="width: 86%">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar shadow" style="">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -42,10 +48,11 @@
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                placeholder="Qidiruv..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn" style="background-color: #1cc88a" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
+                                <button class="btn" style="background-color: rgb(22 163 74) ;" type="button">
+                                    <i class="fas fa-search fa-fw" style="color: white;"></i>
+
                                 </button>
                             </div>
                         </div>
@@ -66,11 +73,13 @@
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
+                                            placeholder="Qidiruv..." aria-label="Search"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn" style="background-color: #1cc88a" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
+                                            <button class="btn" style="background-color: rgb(22 163 74) ;"
+                                                type="button">
+                                                <i class="fas fa-search fa-fw" style="color: white;"></i>
+
                                             </button>
                                         </div>
                                     </div>
@@ -120,47 +129,55 @@
                     </ul>
 
                 </nav>
-                <div class="row">
-                    <div class="col-md-12">
-                        @if (session('message'))
-                            <div class="alert alert-success">{{ session('message') }}</div>
-                        @endif
+                <div>
+                    <div>
+                    <div class="container-fluid">
+                    <div class="con m-5">
+                            <div class="col-md-12">
+                                @if (session('message'))
+                                    <div class="alert alert-success">{{ session('message') }}</div>
+                                @endif
+                            </div>
+                            <div class="card shadow mb-4" style="">
+                                <div class="card-header py-3" style="background-color: rgb(22 163 74);">
+                                    <h5 class="m-0 font-weight-bold text-white float-left">Slayder qo'shing</h5>
+                                    <a href="{{ url('admin/sldr/') }}" class="btn btn-outline-success text-white float-end"
+                                    style="font-size:12px">
+                                    Qaytish
+                                </a>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{ url('admin/sldr/') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+        
+                                        <div class="mb-3">
+                                            <label for="">Sarlavha</label>
+                                            <input type="text" name="title" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="">Tavsif</label>
+                                            <input type="text" name="description" class="form-control">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="">Rasm qo'shish</label>
+                                            <input type="file" name="image" class="form-control">
+                                        </div>
+                                        <div class="mb-0">
+                                               
+                                            <input style="width: 15px; height: 15px" type="checkbox" name="status">
+                                            <label style="font-size: 18px" for="">Holat</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn float-end" style="background-color: rgb(22 163 74); color:#fff">Saqlash</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                     </div>
-                    <div class="card" style="margin-top: 8%; margin-left: 4%; width:93%">
-                        <div class="card-header" style="padding-bottom: 10px">
-                            <h3 style="display: flex">Add Slider
-                                <a href="{{ url('admin/sldr/') }}" class=" btn btn-primary"
-                                    style="margin-left: 83%">Back</a>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <form action="{{url('admin/sldr/')}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-
-                                <div class="mb-3">
-                                    <label for="">Title</label>
-                                    <input type="text" name="title" class="form-control">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Description</label>
-                                    <input type="text" name="description" class="form-control">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Image</label>
-                                    <input type="file" name="image" class="form-control">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="">Status</label></br>
-                                    <input type="checkbox" name="status">
-                                </div>
-                                <div class="mb-3">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
-
-                </div>
+                    </div>
+                    </div>
+                
             </div>
             <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
             <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

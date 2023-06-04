@@ -14,7 +14,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" type="button"
                             data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-solid fa-pen"></i></button>
                     </div>
                 </form>
             </div>
@@ -22,26 +22,30 @@
     </div>
 
     <div class="container-fluid">
-        <a href="{{ url('admin/category/create') }}">
-            <button type="button" class="btn btn-primary ml-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                📂 Add Category
+        <a style="margin-left:1%" href="{{ url('admin/category/create') }}">
+            <button type="button" class="btn ml-5 text-white shadow" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: rgb(22 163 74);">
+                📂 Kategoriya qo'shish
             </button>
         </a>
 
-        <div class="con ml-5">
+        <div class="con ml-5 shadow">
             @foreach ($categories as $category)
-                <a href="{{ url('admin/category/' . $category->id . '/edit') }}">
-                    <div class="card m-3 float-left" style="width: 17rem;">
+                <a class="text-decoration-none text-center" href="{{ url('admin/category/' . $category->id . '/edit') }}">
+                    <div class="card m-3 float-left shadow" style="width: 17rem; height:380px">
                         <img src="{{ asset('Uploads/Category/' . $category->image) }}" class="card-img-top"
-                            width="55px" height="230px" alt="{{ $category->name }}">
+                            width="230px" height="230px" alt="{{ $category->name }}">
                         <div class="card-body">
-                            <h3 class="text-center">{{ $category->name }}</h3>
-                            <div class="float-end">
+                            <h3 class="text-center text-decoration-none text-dark hover-text-dec-none" style="width: 15rem; height:60px">{{ $category->name }}</h3>
+                            <div class="float-end d-flex justify-content-center">
                                 <a href="{{ url('admin/category/' . $category->id . '/edit') }}"
-                                    class="btn btn-warning">Edit</a>
+                                    class="btn btn-warning m-1">
+                                    <i class="fa fa-solid fa-pen"></i>
+                                </a>
                                 <a href="{{ url('admin/category/' . $category->id . '/delete') }}"
-                                    onclick="return confirm('Are you sure you want to delete this Category?')"
-                                    class="btn btn-danger ">Delete</a>
+                                    onclick="return confirm('Haqiqatan ham ushbu turkumni oʻchirib tashlamoqchimisiz?')"
+                                    class="btn btn-danger m-1 ">
+                                    <i class="fa fa-sharp fa-regular fa-trash"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

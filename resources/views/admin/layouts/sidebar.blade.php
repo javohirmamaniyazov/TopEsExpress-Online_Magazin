@@ -1,4 +1,4 @@
-<ul class="navbar-nav sidebar sidebar-success accordion" style=" background-color: #1cc88a!important"
+<ul class="navbar-nav sidebar sidebar-success accordion btn-success position-absolute§" style="background-color: rgb(22 163 74);"
     id="accordionSidebar">
     <a class="sidebar-brand d-flex align-items-center m-1 justify-content-center" href="{{ url('/admin/dashboard') }}">
         <div class="sidebar-brand-icon">
@@ -18,67 +18,53 @@
             <i style="color: black;" class="fas fa-fw fa-tachometer-alt"></i>
             <span style="color: black;">Dashboard</span></a>
     </li>
+    <hr class="sidebar-divider">
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin/orders')}}">
+            <i style="color: black;" class="fas fa-fw fa-table"></i>
+            <span style="color: black;">Buyurtmalar</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin/users')}}">
+            <i style="color: black;" class="fas fa-fw fa-users"></i>
+            <span style="color: black;">Foydalanuvchilar</span></a>
+    </li>
 
     <hr class="sidebar-divider">
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('admin/category') }}">
             <i style="color: black;" class="fas fa-fw fa-cog"></i>
-            <span style="color: black;">Categoriya</span></a>
+            <span style="color: black;">Kategoriya</span></a>
     </li>
     <!-- Divider -->
 
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="{{ url('admin/brands') }}">
-            <i class="fab fa-bandcamp" style="color: black;"></i>
-            <span style="color: black;">Brand</span></a>
+            <i class="fas fa-copyright" style="color: black;"></i>
+            <span style="color: black;">Brend</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="{{ url('admin/colors') }}">
-            <i class="fab fa-bandcamp" style="color: black;"></i>
-            <span style="color: black;">Color</span></a>
+             <i class="fas fa-tint" style="color: black;"></i>
+            <span style="color: black;">Rang</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="{{ url('admin/products') }}">
             <i style="color: black;" class="fas fa-fw fa-shopping-cart"></i>
-            <span style="color: black;">Products</span></a>
+            <span style="color: black;">Mahsulotlar</span></a>
     </li>
-
-    <hr class="sidebar-divider">
-    <!-- Nav Item - Pages Collapse Menu -->
-
-    <li class="nav-item">
-        <a class="nav-link" href="Royxat.html">
-            <i style="color: black;" class="fas fa-fw fa-users"></i>
-            <span style="color: black;">Admins</span></a>
-    </li>
-
-    <hr class="sidebar-divider">
-
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i style="color: black;" class="fas fa-fw fa-chart-area"></i>
-            <span style="color: black;">Statistika</span></a>
-    </li>
-
-    <hr class="sidebar-divider">
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="">
-            <i style="color: black;" class="fas fa-fw fa-table"></i>
-            <span style="color: black;">Buyurtmalar</span></a>
-    </li>
-
     <hr class="sidebar-divider d-none d-md-block">
     <li class="nav-item">
         <a class="nav-link" href="{{ url('admin/sldr') }}">
-            <i style="color: black;" class="fas fa-fw fa-shopping-cart"></i>
-            <span style="color: black;">Slider</span></a>
+            <i style="color: black;" class='fas fa-sliders-h'></i>
+            <span style="color: black;">Slayder</span></a>
     </li>
 
     <hr class="sidebar-divider d-none d-md-block">

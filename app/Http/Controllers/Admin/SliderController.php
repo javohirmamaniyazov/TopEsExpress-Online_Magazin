@@ -49,7 +49,7 @@ class SliderController extends Controller
             'status' => $validatedData['status'],
         ]);
 
-        return redirect('admin/sldr')->with('message', 'Slider Added');
+        return redirect('admin/sldr')->with('message', "Slayder qo'shildi");
     }
 
     public function edit(Slider $slider)
@@ -57,76 +57,40 @@ class SliderController extends Controller
         return view('admin.slider.edit', compact('slider'));
     }
 
-
-    public function update(Request $request, Slider $slider)
+    public function update(SliderFormRequest $request, Slider $slider)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:800',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png',
-            'status' => 'nullable',
-        ]);
-
-        $validatedData = $request->all();
-
+        $validatedData = $request->validated();
         if ($request->hasFile('image')) {
-            // Delete the previous image file
-            if (File::exists($slider->image)) {
-                File::delete($slider->image);
-            }
-
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time() . '.' . $ext;
             $file->move('uploads/slider/', $filename);
             $validatedData['image'] = "uploads/slider/$filename";
+        } else {
+            // If no new image is uploaded, use the existing image
+            $validatedData['image'] = $slider->image;
         }
-
+    
         $validatedData['status'] = $request->status == true ? '1' : '0';
-
+    
         $slider->update([
             'title' => $validatedData['title'],
             'description' => $validatedData['description'],
             'image' => $validatedData['image'],
             'status' => $validatedData['status'],
         ]);
-
-        return redirect('admin/sldr')->with('message', 'Slider Updated');
+    
+        return redirect('admin/sldr')->with('message', "Slayder o'zgartirildi");
     }
-
-
-
-
+    
+    
+    
 
     public function destroy($id)
     {
         $slider = Slider::findOrFail($id);
         $slider->delete();
 
-        return redirect('admin/sldr')->with('message', 'Slider Deleted');
+        return redirect('admin/sldr')->with('message', "Slayder o'chirildi");
     }
 }
-
-
-
-        // $request->validate([
-        //     'title' => 'required  ',
-        //     'description' => 'required',
-        // ]);
-
-        // $title = $request->title;
-        // $description = $request->description;
-        // $status=$request->status == true ? '1' : '0';
-
-        // $product = new Slider;
-        // $product->title=$title;
-        // $product->description=$description;
-        // $product->slug=$slug;
-        // $product->brand=$brand;
-        // $product->small_description=$small_description;
-        // $product->description=$description;
-        // $product->original_price=$original_price;
-        // $product->selling_price=$selling_price;
-        // $product->quantity=$quantity;
-        // $product->trending=$trending;
-        // $product->status=$status;
